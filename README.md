@@ -7,7 +7,7 @@ A simple flashcards app to go through questions and answers.
 
 ### App Walk-though
 
-![](https://i.imgur.com/QFVvGx2.gif)
+![](https://i.imgur.com/x2vJYkl.gif)
 
 ## Required
 - [x] Create New Project in Xcode

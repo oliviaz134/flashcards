@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Give it round corners
+        // Give it round corners and shadows
         card.layer.cornerRadius = 20.0
         card.layer.shadowRadius = 15.0
         card.layer.shadowOpacity = 0.2
@@ -67,6 +67,32 @@ class ViewController: UIViewController {
     
     @IBAction func didTapOptionThree(_ sender: Any) {
         btnOptionThree.isHidden = true
+    }
+    
+    func updateFlashcard(question: String, answer: String, extraAnswer1: String?, extraAnswer2: String?) {
+        frontLabel.text = question
+        backLabel.text = answer
+        
+        btnOptionOne.setTitle(extraAnswer1, for: .normal)
+        btnOptionTwo.setTitle(answer, for: .normal)
+        btnOptionThree.setTitle(extraAnswer2, for: .normal)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // Destination of the segue is the Navigation Controller
+        let navigationController = segue.destination as! UINavigationController
+        
+        // Navigation Controller only contains a Creation View Controller
+        let creationController = navigationController.topViewController as! CreationViewController
+        
+        // Set flashcardsController property to self
+        creationController.flashcardsController = self
+        
+        if segue.identifier == "EditSegue" {
+            creationController.initialQuestion = frontLabel.text
+            creationController.initialAnswer = backLabel.text
+        }
     }
     
 }

@@ -10,6 +10,8 @@ import UIKit
 struct Flashcard {
     var question: String
     var answer: String
+    var extraAnswer1: String
+    var extraAnswer2: String
 }
 
 class ViewController: UIViewController {
@@ -24,6 +26,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var prevButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     // Array to hold flashcards
     var flashcards = [Flashcard]()
@@ -156,6 +159,9 @@ class ViewController: UIViewController {
         // Update labels
         frontLabel.text = currentFlashcard.question
         backLabel.text = currentFlashcard.answer
+        btnOptionOne.setTitle(currentFlashcard.extraAnswer1, for: .normal)
+        btnOptionTwo.setTitle(currentFlashcard.answer, for: .normal)
+        btnOptionThree.setTitle(currentFlashcard.extraAnswer2, for: .normal)
     
     }
     
@@ -174,12 +180,20 @@ class ViewController: UIViewController {
         } else {
             prevButton.isEnabled = true
         }
+        
+        // Disable delete button if number of flashcards is 1
+        if flashcards.count == 1 {
+            deleteButton.isEnabled = false
+        } else {
+            deleteButton.isEnabled = true
+        }
     }
     
     func updateFlashcard(question: String, answer: String, extraAnswer1: String, extraAnswer2: String, isExisting: Bool) {
-        let flashcard = Flashcard(question: question, answer: answer)
+        let flashcard = Flashcard(question: question, answer: answer, extraAnswer1: extraAnswer1, extraAnswer2: extraAnswer2)
         frontLabel.text = flashcard.question
         backLabel.text = flashcard.answer
+        
         
         btnOptionOne.setTitle(extraAnswer1, for: .normal)
         btnOptionTwo.setTitle(answer, for: .normal)
@@ -234,7 +248,7 @@ class ViewController: UIViewController {
         
         // From flashcard array to dictionary array
         let dictionaryArray = flashcards.map { (card) -> [String: String] in
-            return ["question": card.question, "answer": card.answer]
+            return ["question": card.question, "answer": card.answer, "extraAnswer1": card.extraAnswer1, "extraAnswer2": card.extraAnswer2]
         }
         
         // Save array on disk using UserDefaults
@@ -251,7 +265,7 @@ class ViewController: UIViewController {
             
             // There exists a dictionary array
             let savedCards = dictionaryArray.map { dictionary -> Flashcard in
-                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!)
+                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!, extraAnswer1: dictionary["extraAnswer1"]!, extraAnswer2: dictionary["extraAnswer2"]!)
             }
             
             // Put all these cards in flashcards array

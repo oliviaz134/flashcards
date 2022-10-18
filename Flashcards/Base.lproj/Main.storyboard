@@ -139,6 +139,7 @@
                         <outlet property="btnOptionThree" destination="9OT-Bq-us9" id="aZo-5B-vWc"/>
                         <outlet property="btnOptionTwo" destination="r8g-5Y-Wo4" id="efQ-GI-Udg"/>
                         <outlet property="card" destination="dP4-Eq-c6q" id="gJN-x5-dXM"/>
+                        <outlet property="deleteButton" destination="SJt-xI-3X2" id="DxY-Wi-Rqt"/>
                         <outlet property="frontLabel" destination="Q46-Wn-QPK" id="YxD-gS-Gsw"/>
                         <outlet property="nextButton" destination="OhU-hs-K1U" id="BGQ-ok-HhY"/>
                         <outlet property="prevButton" destination="9ol-Ru-sIq" id="UI7-Rr-Jrz"/>
